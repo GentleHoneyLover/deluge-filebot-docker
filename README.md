@@ -1,2 +1,2 @@
-# home-media-server
-Home media server setup with Docker
+# deluge-filebot-docker
+Deluge Bittorrent client and filebot renaming tool in one container
