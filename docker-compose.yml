@@ -1,0 +1,21 @@
+version: "3"
+services:
+
+  deluge-filebot:
+    image: gentlehoneylover/deluge-filebot
+    container_name: deluge-filebot
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+    environment:
+      - PUID=501
+      - PGID=20
+      - TZ=Europe/Berlin
+      - UMASK_SET=022 #optional
+      - DELUGE_LOGLEVEL=error #optional
+    ports:
+      - 8112:8112
+    volumes:
+      - ~/.docker-containers/deluge-filebot/config:/config
+      - ~/Downloads:/downloads
+    restart: unless-stopped
