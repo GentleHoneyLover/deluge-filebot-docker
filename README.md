@@ -8,6 +8,6 @@ This container includes deluge 1.3 installed over an ubuntu 18.04 image. The rea
 - Deluge daemon and Deluge web client succesfully run
 
 ## To-dos:
-- The the filebot command-line tool
+- Add the filebot command-line tool
 - Sort out umasks, UIDs, etc.
 - Check for any security conserns
