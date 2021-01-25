@@ -4,9 +4,9 @@ services:
   deluge-filebot:
     image: gentlehoneylover/deluge-filebot
     container_name: deluge-filebot
-    network_mode: service:vpn
-    depends_on:
-      - vpn
+    # network_mode: service:vpn
+    # depends_on:
+    #   - vpn
     environment:
       - PUID=501
       - PGID=20
@@ -16,6 +16,6 @@ services:
     ports:
       - 8112:8112
     volumes:
-      - ~/.docker-containers/deluge-filebot/config:/config
+      - ~/.docker-containers/deluge-filebot:/config
       - ~/Downloads:/downloads
     restart: unless-stopped
