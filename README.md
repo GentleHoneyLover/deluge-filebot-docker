@@ -6,8 +6,9 @@ This container includes deluge 1.3 installed over an ubuntu 18.04 image. The rea
 ## What's working so far:
 - Supervisor config works
 - Deluge daemon and Deluge web client succesfully run
+- Filebot command-line tool works
 
 ## To-dos:
-- Add the filebot command-line tool
 - Sort out umasks, UIDs, etc.
+- Sort out ENV variables
 - Check for any security conserns
