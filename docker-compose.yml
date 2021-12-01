@@ -2,7 +2,7 @@ version: "3"
 services:
 
   deluge-filebot:
-    image: gentlehoneylover/deluge-filebot
+    image: docker.io/gentlehoneylover/deluge-filebot
     container_name: deluge-filebot
     # network_mode: service:vpn
     # depends_on:
