@@ -38,7 +38,6 @@ deluge-filebot:
     volumes:
       - /path/to/config/folder:/config
       - /path/to/downloads/folder:/downloads
-      - /path/to/media/folder:/data
       - /path/to/watchfolder:/watchfolder
     restart: unless-stopped
 ```
@@ -63,5 +62,4 @@ deluge-filebot:
 | :----: | --- |
 | `/config` | Folder where Deluge and FileBot keep config files |
 | `/downloads` | Folder for downloaded files |
-| `/data` | Folder for media files (useful when FileBotTool rules move renamed files to a certain folder structure of your media library) |
 | `/watchfolder` | A folder Deluge should be watching to auto-pickup new .torrent files |
