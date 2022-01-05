@@ -2,39 +2,50 @@ FROM ubuntu:18.04
 
 LABEL maintainer="gentlehoneylover"
 
-# environment variables
+# Environment variables
+ENV DELUGE_VERSION="1.3.15"
+ENV FILEBOT_VERSION="4.9.4"
+ENV CONFIG="/config"
+ENV DELUGE_CONFIG="$CONFIG/deluge"
+ENV PYTHON_EGG_CACHE="$DELUGE_CONFIG/plugins/.python-eggs"
+ENV HOME="$CONFIG/filebot"
+ENV FILEBOT_OPTS="-Dapplication.deployment=docker -Duser.home=$HOME"
+ENV LANG="C.UTF-8"
+ENV HISTFILE=
 ARG DEBIAN_FRONTEND="noninteractive"
-ENV PYTHON_EGG_CACHE="/config/deluge/plugins/.python-eggs"
-ENV FILEBOT_VERSION 4.9.2
-ENV HOME /config/filebot
-ENV LANG C.UTF-8
-ENV FILEBOT_OPTS "-Dapplication.deployment=docker -Duser.home=$HOME"
 
-# install software
+# Add local files
+COPY init.sh /opt/init.sh
+COPY services.conf /etc/supervisor/conf.d/services.conf
+
+# Install software
 RUN \
-	echo "**** install packages ****" && \
+	echo "**** install pre-requisites ****" && \
 	apt-get update && \
 	apt-get install -y \
-	supervisor \
-	deluged deluge-console deluge-web	\
-	python3-future python3-requests p7zip-full unrar unzip \
-	default-jre-headless libjna-java mediainfo libchromaprint-tools p7zip-rar mkvtoolnix mp4v2-utils gnupg curl file inotify-tools && \
+		gnupg curl supervisor \
+		python3-future python3-requests unzip unrar p7zip-full p7zip-rar \
+		default-jre-headless libjna-java mediainfo libchromaprint-tools mkvtoolnix mp4v2-utils file inotify-tools && \
 	echo "**** add repositories ****" && \
 	apt-key adv --fetch-keys https://raw.githubusercontent.com/filebot/plugins/master/gpg/maintainer.pub && \
 	echo "deb [arch=all] https://get.filebot.net/deb/ universal main" > /etc/apt/sources.list.d/filebot.list && \
+	echo "**** install main packages ****" && \
 	apt-get update && \
 	apt-get install -y --no-install-recommends \ 
-	filebot && \
+		deluged deluge-console deluge-web	\
+		filebot && \
 	echo "**** cleanup ****" && \
 	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
 	echo "**** create required folders ****" && \
-	mkdir -p /var/log/supervisor
+	mkdir -p /var/log/supervisor && \
+	echo "**** create xyz user ****" && \
+ 	useradd --system --user-group xyz && \
+	echo "**** make init script executable ****" && \
+	chmod +x /opt/init.sh
 
-# add local files
-COPY services.conf /etc/supervisor/conf.d/services.conf
-
-# ports and volumes
+# Ports and volumes
 EXPOSE 8112 58846 58946 58946/udp
-VOLUME /config /downloads
+VOLUME /config /downloads /watchfolder /data
 
-ENTRYPOINT ["/usr/bin/supervisord"]
+# Program that starts with the container
+ENTRYPOINT ["/opt/init.sh"]
