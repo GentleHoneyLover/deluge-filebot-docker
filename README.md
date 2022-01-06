@@ -30,8 +30,8 @@ deluge-filebot:
       - PUID=<your-user-id>
       - PGID=<your-group-id>
       - TZ=Europe/London
-      - UMASK_SET=022 #optional
-      - DELUGE_LOGLEVEL=error #optional
+      - UMASK_SET=022
+      - DELUGE_LOGLEVEL=error
     ports:
       - 8112:8112 #web-ui port 
       - 58846:58846 #deluge daemon port
@@ -47,9 +47,9 @@ deluge-filebot:
 | :----: | --- |
 | `PUID=1000` | Sets user ID to a specific value (to match user on the host) |
 | `PGID=1000` | Sets group ID to a specific value (to match user group on the host) |
-| `UMASK_SET=022` | Sets [umask](https://en.wikipedia.org/wiki/Umask) under which files are created (default is `022`)
+| `UMASK_SET=002` | Sets [umask](https://en.wikipedia.org/wiki/Umask) under which files are created (default is `002`)
 | `TZ=Europe/London` | Specify a timezone to use |
-| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Deluge, default is `info` for deluged and `warning` for delgued-web |
+| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Delug (default is `warning`) |
 
 ## Ports
 | Port | What it is for |

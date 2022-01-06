@@ -8,10 +8,14 @@ ENV FILEBOT_VERSION="4.9.4"
 ENV CONFIG="/config"
 ENV DELUGE_CONFIG="$CONFIG/deluge"
 ENV PYTHON_EGG_CACHE="$DELUGE_CONFIG/plugins/.python-eggs"
+ENV DELUGE_LOGLEVEL="warning"
+ENV UMASK="002"
 ENV HOME="$CONFIG/filebot"
 ENV FILEBOT_OPTS="-Dapplication.deployment=docker -Duser.home=$HOME"
 ENV LANG="C.UTF-8"
 ENV HISTFILE=
+ENV PUID="1000"
+ENV PGID="1000"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # Add local files
