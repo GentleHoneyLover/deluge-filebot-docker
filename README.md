@@ -27,11 +27,11 @@ deluge-filebot:
     image: docker.io/gentlehoneylover/deluge-filebot
     restart: unless-stopped
     environment:
-      - PUID=<your-user-id>
-      - PGID=<your-group-id>
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/London
-      - UMASK_SET=022
-      - DELUGE_LOGLEVEL=error
+      - UMASK_SET=002 #optional
+      - DELUGE_LOGLEVEL=error #optional
     ports:
       - 8112:8112 #web-ui port 
       - 58846:58846 #deluge daemon port
