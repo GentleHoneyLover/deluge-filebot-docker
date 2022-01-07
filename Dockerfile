@@ -2,27 +2,11 @@ FROM ubuntu:18.04
 
 LABEL maintainer="gentlehoneylover"
 
-# Environment variables
 ENV DELUGE_VERSION="1.3.15"
 ENV FILEBOT_VERSION="4.9.4"
-ENV CONFIG="/config"
-ENV DELUGE_CONFIG="$CONFIG/deluge"
-ENV PYTHON_EGG_CACHE="$DELUGE_CONFIG/plugins/.python-eggs"
-ENV DELUGE_LOGLEVEL="warning"
-ENV UMASK="002"
-ENV HOME="$CONFIG/filebot"
-ENV FILEBOT_OPTS="-Dapplication.deployment=docker -Duser.home=$HOME"
 ENV LANG="C.UTF-8"
-ENV HISTFILE=
-ENV PUID="1000"
-ENV PGID="1000"
 ARG DEBIAN_FRONTEND="noninteractive"
 
-# Add local files
-COPY init.sh /opt/init.sh
-COPY services.conf /etc/supervisor/conf.d/services.conf
-
-# Install software
 RUN \
 	echo "**** install pre-requisites ****" && \
 	apt-get update && \
@@ -43,13 +27,24 @@ RUN \
 	echo "**** create required folders ****" && \
 	mkdir -p /var/log/supervisor && \
 	echo "**** create xyz user ****" && \
- 	useradd --system --user-group xyz && \
-	echo "**** make init script executable ****" && \
-	chmod +x /opt/init.sh
+ 	useradd --system --user-group xyz
 
-# Ports and volumes
+ENV CONFIG="/config"
+ENV DELUGE_CONFIG="$CONFIG/deluge"
+ENV PYTHON_EGG_CACHE="$DELUGE_CONFIG/plugins/.python-eggs"
+ENV DELUGE_LOGLEVEL="warning"
+ENV HOME="$CONFIG/filebot"
+ENV FILEBOT_OPTS="-Dapplication.deployment=docker -Duser.home=$HOME"
+ENV HISTFILE=
+ENV UMASK="002"
+ENV PUID="1000"
+ENV PGID="1000"
+
+COPY init.sh /opt/init.sh
+COPY services.conf /etc/supervisor/conf.d/services.conf
+RUN chmod +x /opt/init.sh
+
 EXPOSE 8112 58846 58946 58946/udp
 VOLUME /config /downloads /watchfolder /data
 
-# Program that starts with the container
 ENTRYPOINT ["/opt/init.sh"]
