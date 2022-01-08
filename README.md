@@ -3,7 +3,7 @@
 </p>
 
 # deluge-filebot-docker
-[Deluge](https://deluge-torrent.org]) Bittorrent client and [FileBot](http://www.filebot.net/) renaming tool in one container.
+[Deluge](https://deluge-torrent.org]) Bittorrent client and [FileBot](http://www.filebot.net/) renaming tool in one container. 
 
 ## What is Deluge
 Deluge is a lightweight, Free Software, cross-platform BitTorrent client.
@@ -17,6 +17,13 @@ FileBot is the ultimate tool for renaming and organizing your movies, TV shows a
 
 ## What do you get with this container
 This container includes Deluge and FileBot on top of an Ubuntu image. FileBot can be be utilized via the [FileBotTool](https://github.com/Laharah/deluge-FileBotTool), a plugin for Deluge. Accessing the plugin settings would require a desktop Deluge client — as Web UI is not supported by the plugin.
+
+## Installation
+You can pull it from the Docker Hub via:
+```sh
+docker pull docker.io/gentlehoneylover/deluge-filebot
+```
+Run it via Docker CLI or docker-compose (example below).
 
 ## Example compose file:
 ```yaml
