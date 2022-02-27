@@ -23,4 +23,4 @@ chown xyz:xyz /data
 echo "All done! Starting the services via supervisord..."
 /usr/bin/supervisord
 
-exit 0
+exit 1

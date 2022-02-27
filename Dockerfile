@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 LABEL maintainer="gentlehoneylover"
 
 ENV DELUGE_VERSION="1.3.15"
-ENV FILEBOT_VERSION="4.9.4"
+ENV FILEBOT_VERSION="4.9.5"
 ENV LANG="C.UTF-8"
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -11,7 +11,7 @@ RUN \
 	echo "**** install pre-requisites ****" && \
 	apt-get update && \
 	apt-get install -y \
-		gnupg curl supervisor \
+		gnupg wget curl supervisor \
 		python3-future python3-requests unzip unrar p7zip-full p7zip-rar \
 		default-jre-headless libjna-java mediainfo libchromaprint-tools mkvtoolnix mp4v2-utils file inotify-tools && \
 	echo "**** add repositories ****" && \
@@ -48,3 +48,5 @@ EXPOSE 8112 58846 58946 58946/udp
 VOLUME /config /downloads /watchfolder /data
 
 ENTRYPOINT ["/opt/init.sh"]
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 CMD wget --no-verbose --tries=1 --spider localhost:8112 || exit 1
