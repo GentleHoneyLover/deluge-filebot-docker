@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 LABEL maintainer="gentlehoneylover"
 
 ENV DELUGE_VERSION="1.3.15"
-ENV FILEBOT_VERSION="4.9.5"
+ENV FILEBOT_VERSION="4.9.6"
 ENV LANG="C.UTF-8"
 ARG DEBIAN_FRONTEND="noninteractive"
 
