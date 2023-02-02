@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="gentlehoneylover"
 
-ENV BUILD_DATE="5-Oct-2022"
+ENV BUILD_DATE="23-Feb-2023"
 ENV DELUGE_VERSION="1.3.15"
 ENV FILEBOT_VERSION="4.9.6"
 ENV LANG="C.UTF-8"
