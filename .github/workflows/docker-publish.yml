@@ -3,7 +3,7 @@ name: Build and push to Docker Hub
 on:
   # run it on push to the default repository branch
   push:
-    branches: [master]
+    branches: [alpine]
   # run it during pull request
   pull_request:
 
@@ -43,7 +43,7 @@ jobs:
           # Note: tags has to be all lower-case
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           tags: |
-            docker.io/gentlehoneylover/deluge-filebot:latest 
+            docker.io/gentlehoneylover/deluge-filebot:alpine 
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
