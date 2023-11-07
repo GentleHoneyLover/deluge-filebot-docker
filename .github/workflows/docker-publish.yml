@@ -45,7 +45,7 @@ jobs:
           tags: |
             docker.io/gentlehoneylover/deluge-filebot:alpine 
           # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: ${{ github.ref == 'refs/heads/alpine' }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
