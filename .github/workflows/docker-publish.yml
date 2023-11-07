@@ -41,7 +41,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: .
           # Note: tags has to be all lower-case
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64 #,linux/arm/v7
           tags: |
             docker.io/gentlehoneylover/deluge-filebot:alpine 
           # build on feature branches, push only on main branch
