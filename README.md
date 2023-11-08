@@ -16,7 +16,7 @@ Deluge is a lightweight, Free Software, cross-platform BitTorrent client.
 FileBot is the ultimate tool for renaming and organizing your movies, TV shows and Anime. Match and rename media files against online databases, download artwork and cover images, fetch subtitles, write metadata, and more, all at once in matter of seconds. It's smart and just works.
 
 ## What do you get with this container
-This container includes Deluge and FileBot on top of an Ubuntu image. FileBot can be be utilized via the [FileBotTool](https://github.com/Laharah/deluge-FileBotTool), a plugin for Deluge. Accessing the plugin settings would require a desktop Deluge client — as Web UI is not supported by the plugin.
+This container includes Deluge and FileBot on top of an Alpine image. FileBot can be be utilized via the [FileBotTool](https://github.com/Laharah/deluge-FileBotTool), a plugin for Deluge (included in the image — simply activate in the Deluge UI settings). Accessing the plugin settings would require a desktop Deluge client (remotely connected to the Daemon in this container) — as Web UI is not supported by the plugin. See [Deluge User Guide](https://dev.deluge-torrent.org/wiki/UserGuide) for details.
 
 ## Installation
 You can pull it from the Docker Hub via:
