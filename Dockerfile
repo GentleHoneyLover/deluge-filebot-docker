@@ -2,8 +2,6 @@ FROM ubuntu:18.04
 
 LABEL maintainer="gentlehoneylover"
 
-ENV BUILD_DATE="2-Nov-2023"
-ENV LANG="C.UTF-8"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 RUN \
@@ -26,8 +24,9 @@ RUN \
 	echo "**** create required folders ****" && \
 	mkdir -p /var/log/supervisor && \
 	echo "**** create xyz user ****" && \
- 	useradd --system --user-group xyz
+	useradd --system --user-group xyz
 
+ENV LANG="C.UTF-8"
 ENV CONFIG="/config"
 ENV DELUGE_CONFIG="$CONFIG/deluge"
 ENV PYTHON_EGG_CACHE="$DELUGE_CONFIG/plugins/.python-eggs"
@@ -39,8 +38,7 @@ ENV UMASK="002"
 ENV PUID="1000"
 ENV PGID="1000"
 
-COPY init.sh /opt/init.sh
-COPY services.conf /etc/supervisor/conf.d/services.conf
+COPY rootfs/ /
 RUN chmod +x /opt/init.sh
 
 EXPOSE 8112 58846 58946 58946/udp
