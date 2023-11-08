@@ -47,7 +47,7 @@ ENV UMASK="002"
 ENV PUID="1000"
 ENV PGID="1000"
 
-COPY root/ /
+COPY rootfs/ /
 RUN chmod +x /opt/init.sh
 
 EXPOSE 8112 58846 58946 58946/udp
