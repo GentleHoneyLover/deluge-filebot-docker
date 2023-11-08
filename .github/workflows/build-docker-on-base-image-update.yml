@@ -3,7 +3,7 @@ name: Build and push to Docker Hub
 on:
   # run it on schedule
   schedule:
-    - cron: '0 4 * * *'
+    - cron: "0 4 * * *"
 
 jobs:
   # define job to build and publish docker image
@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         if: steps.baseupdatecheck.outputs.needs-updating == 'true'
-      
+
       - name: Build image and push to Docker Hub
         uses: docker/build-push-action@v5
         with:
@@ -54,7 +54,7 @@ jobs:
           # Note: tags has to be all lower-case
           platforms: linux/amd64,linux/arm64 #,linux/arm/v7
           tags: |
-            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:alpine 
+            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:alpine
           # build on all branches, push only on alpine branch
           push: ${{ github.ref == 'refs/heads/alpine' }}
         if: steps.baseupdatecheck.outputs.needs-updating == 'true'

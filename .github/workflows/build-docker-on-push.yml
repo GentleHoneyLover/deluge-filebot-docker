@@ -5,9 +5,9 @@ on:
   push:
     branches: [alpine]
     paths:
-      - '.github/workflows/build-docker-on-push.yml'
-      - 'Dockerfile'
-      - 'rootfs/**'
+      - ".github/workflows/build-docker-on-push.yml"
+      - "Dockerfile"
+      - "rootfs/**"
 
 jobs:
   # define job to build and publish docker image
@@ -36,7 +36,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Build image and push to Docker Hub
         uses: docker/build-push-action@v5
         with:
@@ -45,7 +45,7 @@ jobs:
           # Note: tags has to be all lower-case
           platforms: linux/amd64,linux/arm64 #,linux/arm/v7
           tags: |
-            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:alpine 
+            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:alpine
           # build on all branches, push only on alpine branch
           push: ${{ github.ref == 'refs/heads/alpine' }}
 

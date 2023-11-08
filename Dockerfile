@@ -13,7 +13,7 @@ RUN \
 	echo "**** Install packages ****" && \
 	apk add --no-cache \
 		supervisor \
-  		py3-future py3-requests deluge \
+		py3-future py3-requests deluge \
 		openjdk16-jre-headless mediainfo chromaprint && \
 	echo "**** Grab GeoIP database ****" && \
 	wget -O \
