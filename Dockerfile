@@ -5,25 +5,28 @@ LABEL maintainer="gentlehoneylover"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 RUN \
-	echo "**** install pre-requisites ****" && \
+	echo "**** Install pre-requisites ****" && \
 	apt-get update && \
-	apt-get install -y \
-		gnupg wget curl supervisor \
-		python3-future python3-requests unzip unrar p7zip-full p7zip-rar \
-		default-jre-headless libjna-java mediainfo libchromaprint-tools mkvtoolnix mp4v2-utils file inotify-tools && \
-	echo "**** add repositories ****" && \
+	apt-get install -y --no-install-recommends \ 
+		supervisor gnupg \
+		python3-future python3-requests \
+		default-jre-headless libjna-java mediainfo libchromaprint-tools && \
+	echo "**** Add repositories ****" && \
 	apt-key adv --fetch-keys https://raw.githubusercontent.com/filebot/plugins/master/gpg/maintainer.pub && \
 	echo "deb [arch=all] https://get.filebot.net/deb/ universal main" > /etc/apt/sources.list.d/filebot.list && \
-	echo "**** install main packages ****" && \
+	echo "**** Install main packages ****" && \
 	apt-get update && \
 	apt-get install -y --no-install-recommends \ 
 		deluged deluge-console deluge-web	\
 		filebot && \
 	echo "**** cleanup ****" && \
-	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
-	echo "**** create required folders ****" && \
+	apt-get remove -y \
+		gnupg && \
+	apt autoremove -y && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+	echo "**** Create required folders ****" && \
 	mkdir -p /var/log/supervisor && \
-	echo "**** create xyz user ****" && \
+	echo "**** Create xyz user ****" && \
 	useradd --system --user-group xyz
 
 ENV LANG="C.UTF-8"
