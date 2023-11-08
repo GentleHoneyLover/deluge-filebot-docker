@@ -21,7 +21,7 @@ This container includes Deluge and FileBot on top of an Alpine image. FileBot ca
 ## Installation
 You can pull it from the Docker Hub via:
 ```sh
-docker pull docker.io/gentlehoneylover/deluge-filebot
+docker pull docker.io/gentlehoneylover/deluge-filebot:alpine
 ```
 Run it via Docker CLI or docker-compose (example below).
 
