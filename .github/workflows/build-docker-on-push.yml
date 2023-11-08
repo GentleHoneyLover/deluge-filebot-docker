@@ -5,7 +5,7 @@ on:
   push:
     branches: [alpine]
     paths:
-      - '.github/workflows/docker-on-push.yml'
+      - '.github/workflows/build-docker-on-push.yml'
       - 'Dockerfile'
       - 'root/**'
 
