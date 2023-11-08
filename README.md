@@ -31,7 +31,7 @@ version: "3"
 services:
 deluge-filebot:
     container_name: deluge-filebot
-    image: docker.io/gentlehoneylover/deluge-filebot
+    image: docker.io/gentlehoneylover/deluge-filebot:alpine
     restart: unless-stopped
     environment:
       - PUID=1000

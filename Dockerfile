@@ -47,9 +47,7 @@ ENV UMASK="002"
 ENV PUID="1000"
 ENV PGID="1000"
 
-COPY init.sh /opt/init.sh
-COPY services.ini /etc/supervisor.d/services.ini
-COPY defaults /defaults
+COPY root/ /
 RUN chmod +x /opt/init.sh
 
 EXPOSE 8112 58846 58946 58946/udp
