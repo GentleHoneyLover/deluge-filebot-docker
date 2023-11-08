@@ -45,7 +45,7 @@ jobs:
           # Note: tags has to be all lower-case
           platforms: linux/amd64,linux/arm64 #,linux/arm/v7
           tags: |
-            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:master
+            docker.io/${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot:latest
           # build on all branches, push only on master branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
