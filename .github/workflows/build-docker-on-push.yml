@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/build-docker-on-push.yml'
       - 'Dockerfile'
-      - 'root/**'
+      - 'rootfs/**'
 
 jobs:
   # define job to build and publish docker image
