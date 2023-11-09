@@ -1,4 +1,4 @@
-name: Build and push to Docker Hub
+name: Build container on base image update
 
 on:
   # run it on schedule
@@ -62,3 +62,13 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
         if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+
+      - name: Pushover notification
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER_KEY }}
+        with:
+          status: ${{ job.status }}
+          title: "GitHub Actions"
+          message: "'Build container on base image update' action completed"

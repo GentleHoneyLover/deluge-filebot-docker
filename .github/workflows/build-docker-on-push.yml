@@ -1,4 +1,4 @@
-name: Build and push to Docker Hub
+name: Build container on git push
 
 on:
   # run it on push to the default repository branch
@@ -51,3 +51,13 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - name: Pushover notification
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER_KEY }}
+        with:
+          status: ${{ job.status }}
+          title: "GitHub Actions"
+          message: "'Build container on git push' action completed"
