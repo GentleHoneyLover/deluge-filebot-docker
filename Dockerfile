@@ -1,11 +1,11 @@
-FROM docker.io/alpine:3.17
+FROM docker.io/alpine:3.18
 
 LABEL maintainer="gentlehoneylover"
 
 ENV FILEBOT_VERSION 5.1.2
 ENV FILEBOT_URL https://get.filebot.net/filebot/FileBot_$FILEBOT_VERSION/FileBot_$FILEBOT_VERSION-portable.tar.xz
-ENV FILEBOT_PLUGIN_VERSION 2.0.3-py3.9
-ENV FILEBOT_PLUGIN_URL https://github.com/Laharah/deluge-FileBotTool/releases/download/2.0.3/FileBotTool-$FILEBOT_PLUGIN_VERSION.egg
+ENV FILEBOT_PLUGIN_VERSION 2.0.4
+ENV FILEBOT_PLUGIN_URL https://github.com/Laharah/deluge-FileBotTool/releases/download/$FILEBOT_PLUGIN_VERSION/FileBotTool-$FILEBOT_PLUGIN_VERSION-py3.11.egg
 
 RUN \
 	echo "**** Create required folders ****" && \
