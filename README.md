@@ -64,7 +64,7 @@ deluge-filebot:
 | `PGID=1000` | Sets group ID to a specific value (to match user group on the host) |
 | `UMASK_SET=002` | Sets [umask](https://en.wikipedia.org/wiki/Umask) under which files are created (default is `002`)
 | `TZ=Europe/London` | Specify a timezone to use |
-| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Deluges (default is `warning`) |
+| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Deluge (default is `warning`) |
 
 ## Ports
 | Port | What it is for |
