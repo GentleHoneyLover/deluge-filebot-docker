@@ -1,0 +1,40 @@
+name: Sync README with Docker Hub on git push
+
+on:
+  # run it on push to the default repository branch
+  push:
+    branches: 
+      - master
+    paths:
+      - README.md
+      - .github/workflows/sync-readme-with-docker-hub-on-push.yml
+
+jobs:
+  # define job to build and publish docker image
+  docker-hub-description:
+    name: Sync GitHub README with Docker Hub description
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-latest
+
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/deluge-filebot
+          short-description: ${{ github.event.repository.description }}
+
+      - name: Pushover notification
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER_KEY }}
+        with:
+          status: ${{ job.status }}
+          title: "GitHub Actions"
+          message: "'Sync README with Docker Hub on git push' action completed"
