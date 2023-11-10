@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" src="logo.png" alt="Deluge + FileBot"><br><br>
+  <img width="400" src="https://raw.githubusercontent.com/GentleHoneyLover/deluge-filebot-docker/master/logo.png" alt="Deluge + FileBot"><br><br>
 </p>
 
 # deluge-filebot-docker
