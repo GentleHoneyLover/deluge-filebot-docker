@@ -1,5 +1,9 @@
 <p align="center">
-  <img width="400" src="https://raw.githubusercontent.com/GentleHoneyLover/deluge-filebot-docker/master/logo.png" alt="Deluge + FileBot"><br><br>
+	<a href="https://hub.docker.com/r/gentlehoneylover/deluge-filebot/"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/gentlehoneylover/deluge-filebot?logo=docker&label=Docker%20pulls"></a>
+	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20stars&color=gold"></a>
+	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub issues" src="https://img.shields.io/github/issues/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20issues"></a>
+	<br><br><br>
+  <img width="400" src="https://raw.githubusercontent.com/GentleHoneyLover/deluge-filebot-docker/master/logo.png" alt="Deluge + FileBot"><br>
 </p>
 
 # deluge-filebot-docker
