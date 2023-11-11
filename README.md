@@ -24,19 +24,17 @@ FileBot is the ultimate tool for renaming and organizing your movies, TV shows a
 ## What you get with this container
 This container includes Deluge and FileBot on top of an Ubuntu image. There's also an experimental image based on Alpine. FileBot can be be utilized via the [FileBotTool](https://github.com/Laharah/deluge-FileBotTool), a plugin for Deluge. Accessing the plugin settings would require a desktop Deluge client (remotely connected to the Daemon in this container) — as Web UI is not supported by the plugin. See [Deluge User Guide](https://dev.deluge-torrent.org/wiki/UserGuide) for details.
 
-You can review the Dockerfiles [here](https://github.com/GentleHoneyLover/deluge-filebot-docker). Please report all issues [here](https://github.com/GentleHoneyLover/deluge-filebot-docker/issues).
-
 ## Installation
 You can pull it from the Docker Hub via:
 ```sh
 docker pull docker.io/gentlehoneylover/deluge-filebot:latest
 ```
-Run it via Docker CLI or docker-compose (example below).
+Run it via Docker CLI or docker-compose (examples below).
 
 The Web UI of Deluge is available at `http://<SERVER-IP>:8112` with a default password of `deluge` (can be changed in the Web UI).
 Under `Preferences -> Network` Make sure to match the inbound torrent port to whatever port is mapped in the container (`57988` by default).
 
-## Example Docker CLI command:
+## Example docker CLI command:
 ```sh
 docker run -d \
   --name=deluge \
