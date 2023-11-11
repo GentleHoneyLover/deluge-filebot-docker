@@ -1,10 +1,10 @@
+# deluge-filebot-docker
 <p align="center">
 	<a href="https://hub.docker.com/r/gentlehoneylover/deluge-filebot/"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/gentlehoneylover/deluge-filebot?logo=docker&label=Docker%20pulls"></a>
 	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20stars&color=gold"></a>
 	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub issues" src="https://img.shields.io/github/issues/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20issues"></a>
-</p>
+</p><br>
 
-# deluge-filebot-docker
 [Deluge](https://deluge-torrent.org]) Bittorrent client and [FileBot](http://www.filebot.net/) renaming tool in one container. 
 
 <p align="center">
@@ -33,6 +33,28 @@ docker pull docker.io/gentlehoneylover/deluge-filebot:latest
 ```
 Run it via Docker CLI or docker-compose (example below).
 
+The Web UI of Deluge is available at `http://<SERVER-IP>:8112` with a default password of `deluge` (can be changed in the Web UI).
+Under `Preferences -> Network` Make sure to match the inbound torrent port to whatever port is mapped in the container (`57988` by default).
+
+## Example Docker CLI command:
+```sh
+docker run -d \
+  --name=deluge \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -e UMASK_SET=002 #optional \
+  -e DELUGE_LOGLEVEL=error #optional \
+  -p 8112:8112 \
+  -p 57988:57988/tcp \
+  -p 57988:57988/udp \
+  -v /path/to/config/folder:/config \
+  -v /path/to/downloads/folder:/downloads \
+  -v /path/to/watchfolder:/watchfolder
+  --restart unless-stopped \
+  docker.io/gentlehoneylover/deluge-filebot:latest
+```
+
 ## Example compose file:
 ```yaml
 version: "3"
@@ -50,6 +72,8 @@ deluge-filebot:
     ports:
       - 8112:8112 #web-ui port 
       - 58846:58846 #deluge daemon port
+      - 57988:57988/tcp #inbound tcp torrent port
+      - 57988:57988/udp #inbound udp torrent port
     volumes:
       - /path/to/config/folder:/config
       - /path/to/downloads/folder:/downloads
@@ -58,23 +82,24 @@ deluge-filebot:
 ```
 
 ## Environment variables
-| Variable | What it does |
-| :----: | --- |
-| `PUID=1000` | Sets user ID to a specific value (to match user on the host) |
-| `PGID=1000` | Sets group ID to a specific value (to match user group on the host) |
-| `UMASK_SET=002` | Sets [umask](https://en.wikipedia.org/wiki/Umask) under which files are created (default is `002`)
-| `TZ=Europe/London` | Specify a timezone to use |
-| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Deluge (default is `warning`) |
+|        Variable         | What it does                                                                                       |
+| :---------------------: | -------------------------------------------------------------------------------------------------- |
+|       `PUID=1000`       | Sets user ID to a specific value (to match user on the host)                                       |
+|       `PGID=1000`       | Sets group ID to a specific value (to match user group on the host)                                |
+|     `UMASK_SET=002`     | Sets [umask](https://en.wikipedia.org/wiki/Umask) under which files are created (default is `002`) |
+|   `TZ=Europe/London`    | Specify a timezone to use                                                                          |
+| `DELUGE_LOGLEVEL=error` | Set the loglevel output when running Deluge (default is `warning`)                                 |
 
 ## Ports
-| Port | What it is for |
-| :----: | --- |
-| `8112` | Default port used by Web UI |
+|  Port   | What it is for                                                         |
+| :-----: | ---------------------------------------------------------------------- |
+| `8112`  | Default port used by Web UI                                            |
 | `58846` | Default port used by deluge daemon to allow desktop client connections |
+| `57988` | Inbound torrent traffic                                                |
 
 ## Volumes
-| Volume | What it is for |
-| :----: | --- |
-| `/config` | Folder where Deluge and FileBot keep config files |
-| `/downloads` | Folder for downloaded files |
+|     Volume     | What it is for                                                       |
+| :------------: | -------------------------------------------------------------------- |
+|   `/config`    | Folder where Deluge and FileBot keep config files                    |
+|  `/downloads`  | Folder for downloaded files                                          |
 | `/watchfolder` | A folder Deluge should be watching to auto-pickup new .torrent files |
