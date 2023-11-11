@@ -49,7 +49,7 @@ ENV PGID="1000"
 COPY rootfs/ /
 RUN chmod +x /opt/init.sh
 
-EXPOSE 8112 58846 58946 58946/udp
+EXPOSE 8112 58846 57988/tcp 57988/udp
 VOLUME /config /downloads /watchfolder /data
 
 ENTRYPOINT ["/opt/init.sh"]
