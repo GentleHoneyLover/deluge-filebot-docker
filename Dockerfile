@@ -22,7 +22,7 @@ RUN \
 	echo "**** cleanup ****" && \
 	apt-get remove -y \
 		gnupg && \
-	apt autoremove -y && \
+	apt-get autoremove -y && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	echo "**** Create required folders ****" && \
 	mkdir -p /var/log/supervisor && \
