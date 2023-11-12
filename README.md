@@ -3,6 +3,7 @@
 	<a href="https://hub.docker.com/r/gentlehoneylover/deluge-filebot/"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/gentlehoneylover/deluge-filebot?logo=docker&label=Docker%20pulls"></a>
 	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20stars&color=gold"></a>
 	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub issues" src="https://img.shields.io/github/issues/gentlehoneylover/deluge-filebot-docker?logo=GitHub&label=GitHub%20issues"></a>
+	<a href="https://actions-badge.atrox.dev/gentlehoneylover/deluge-filebot-docker/goto?ref=master"><img alt="GitHub Actions" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fgentlehoneylover%2Fdeluge-filebot-docker%2Fbadge%3Fref%3Dmaster&style=flat" /></a>
 </p><br>
 
 [Deluge](https://deluge-torrent.org]) Bittorrent client and [FileBot](http://www.filebot.net/) renaming tool in one container. 
