@@ -39,18 +39,18 @@ Under `Preferences -> Network` Make sure to match the inbound torrent port to wh
 ```sh
 docker run -d \
   --name=deluge \
+  --restart unless-stopped \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Europe/London \
-  -e UMASK_SET=002 #optional \
-  -e DELUGE_LOGLEVEL=error #optional \
+  -e UMASK_SET=002 \
+  -e DELUGE_LOGLEVEL=error \
   -p 8112:8112 \
   -p 57988:57988/tcp \
   -p 57988:57988/udp \
   -v /path/to/config/folder:/config \
   -v /path/to/downloads/folder:/downloads \
   -v /path/to/watchfolder:/watchfolder
-  --restart unless-stopped \
   docker.io/gentlehoneylover/deluge-filebot:latest
 ```
 
@@ -58,7 +58,7 @@ docker run -d \
 ```yaml
 version: "3"
 services:
-deluge-filebot:
+  deluge-filebot:
     container_name: deluge-filebot
     image: docker.io/gentlehoneylover/deluge-filebot:latest
     restart: unless-stopped
@@ -77,7 +77,6 @@ deluge-filebot:
       - /path/to/config/folder:/config
       - /path/to/downloads/folder:/downloads
       - /path/to/watchfolder:/watchfolder
-    restart: unless-stopped
 ```
 
 ## Environment variables
