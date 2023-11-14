@@ -3,12 +3,17 @@ FROM ubuntu:18.04
 LABEL maintainer="gentlehoneylover"
 
 ARG DEBIAN_FRONTEND="noninteractive"
+ENV FILEBOT_PLUGIN_VER 1.2.11
+ENV PYTHON_VER 2.7
+ENV FILEBOT_PLUGIN_URL https://github.com/Laharah/deluge-FileBotTool/releases/download/$FILEBOT_PLUGIN_VER/FileBotTool-$FILEBOT_PLUGIN_VER-py$PYTHON_VER.egg
 
 RUN \
+	echo "**** Create required folders ****" && \
+	mkdir -p /var/log/supervisor /defaults/plugins && \
 	echo "**** Install pre-requisites ****" && \
 	apt-get update && \
 	apt-get install -y --no-install-recommends \ 
-		supervisor gnupg \
+		supervisor gnupg wget \
 		python3-future python3-requests \
 		default-jre-headless libjna-java mediainfo libchromaprint-tools && \
 	echo "**** Add repositories ****" && \
@@ -19,13 +24,13 @@ RUN \
 	apt-get install -y --no-install-recommends \ 
 		deluged deluge-console deluge-web	\
 		filebot && \
-	echo "**** cleanup ****" && \
+	echo "**** Fetch filebot plugin for Deluge ****" && \
+	wget -P /defaults/plugins/ "$FILEBOT_PLUGIN_URL" && \
+	echo "**** Cleanup ****" && \
 	apt-get remove -y \
-		gnupg && \
+		gnupg wget && \
 	apt-get autoremove -y && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-	echo "**** Create required folders ****" && \
-	mkdir -p /var/log/supervisor && \
 	echo "**** Create xyz user ****" && \
 	useradd --system --user-group xyz
 
