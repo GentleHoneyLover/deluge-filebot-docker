@@ -8,10 +8,10 @@ echo "Grabbing UMASK=${UMASK}..."
 echo "Grabbing DELUGE_LOGLEVEL=${DELUGE_LOGLEVEL}..."
 echo "Grabbing TZ=${TZ}..."
 
-readonly PYTHON_VER=$(python3 -V | cut -f2 -d " " | cut -c 1-4)
+readonly PYTHON_VER=$(python3 -V | cut -f2 -d " " | cut -f1,2 -d ".")
 echo "Grabbing PYTHON_VER=${PYTHON_VER}..."
-readonly PLUGIN_NAME=$(ls /defaults/plugins | cut -c 1-20)
-echo "Grabbing PLUGIN_NAME=${PLUGIN_NAME}..."
+readonly PLUGIN_VER=$(ls /defaults/plugins | cut -f2 -d "-")
+echo "Grabbing PLUGIN_VER=${PLUGIN_VER}..."
 
 # Create xyz user and group
 echo "Setting PUID=${PUID} and PGID=${PGID} to xyz user and group"
@@ -19,20 +19,34 @@ adduser --system --disabled-password --no-create-home --uid "$PUID" xyz
 addgroup --system --gid "$PGID" xyz
 adduser xyz xyz
 
-Handling default configs
+#Handling default configs
 echo "Handling default config for Deluge..."
 if [[ ! -f $DELUGE_CONFIG/core.conf ]]; then
 	cp /defaults/*.conf $DELUGE_CONFIG/
 fi
+
 echo "Installing the FileBot plugin if it's missing..."
 if [[ ! -f $DELUGE_CONFIG/plugins/FileBotTool-*$PYTHON_VER.egg ]]; then
 	echo "FileBot plugin is missing... Installing..."
 	if [[ ! -f $DELUGE_CONFIG/plugins/FileBotTool-*.egg ]]; then
+		echo "Creating plugins folder..."
 		mkdir -p $DELUGE_CONFIG/plugins
 	else
+		echo "Removing old plugins..."
 		rm $DELUGE_CONFIG/plugins/FileBotTool-*.egg
 	fi
-	cp /defaults/plugins/FileBotTool-*.egg $DELUGE_CONFIG/plugins/$PLUGIN_NAME$PYTHON_VER.egg
+	cp /defaults/plugins/FileBotTool-*.egg $DELUGE_CONFIG/plugins/FileBotTool-$PLUGIN_VER-py$PYTHON_VER.egg
+fi
+
+echo "Checking for legacy FileBot licence files..."
+if [[ -f $CONFIG/filebot/.filebot/license.txt ]]; then
+	echo "Legacy FileBot license found..."
+	if [[ -f $CONFIG/filebot/.license ]]; then
+		echo "New license file is also present... Nothing to be done..."
+	else
+		echo "Copying legacy license file to a new location..."
+		cp $CONFIG/filebot/.filebot/license.txt $CONFIG/filebot/.license
+	fi
 fi
 
 # Setting folder ownership
