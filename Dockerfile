@@ -28,7 +28,7 @@ RUN \
 	wget -P /defaults/plugins/ "$FILEBOT_PLUGIN_URL" && \
 	echo "**** Cleanup ****" && \
 	apt-get remove -y \
-		gnupg wget && \
+		gnupg && \
 	apt-get autoremove -y && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	echo "**** Create xyz user ****" && \
