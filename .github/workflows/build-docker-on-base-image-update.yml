@@ -72,3 +72,4 @@ jobs:
           status: ${{ job.status }}
           title: "GitHub Actions"
           message: "'Build container on base image update' action completed"
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
