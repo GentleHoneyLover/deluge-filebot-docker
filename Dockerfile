@@ -12,6 +12,7 @@ RUN \
 	mkdir -p /var/log/supervisor /defaults/plugins && \
 	echo "**** Install pre-requisites ****" && \
 	apt-get update && \
+	apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \ 
 		supervisor gnupg wget \
 		python3-future python3-requests \
