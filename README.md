@@ -1,4 +1,11 @@
 # deluge-filebot-docker
+
+> ❗️ Deprication notice
+>
+> This docker image is depricated and won't be receiveing updates. My recommended alternative is qBittorrent in combination with the *arr stack — it'a a much more powerful and modern combo.
+> 
+<br><br>
+
 <p align="center">
 	<a href="https://hub.docker.com/r/gentlehoneylover/deluge-filebot/"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/gentlehoneylover/deluge-filebot?logo=docker&label=Docker%20pulls"></a>
 	<a href="https://github.com/GentleHoneyLover/deluge-filebot-docker"><img alt="GitHub stars" src="https://img.shields.io/github/stars/gentlehoneylover/deluge-filebot-docker?style=flat&logo=github&label=GitHub%20stars&color=gold"></a>
